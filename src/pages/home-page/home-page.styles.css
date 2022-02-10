@@ -1,9 +1,9 @@
 .container-body{
     height: 80vh;
-    overflow-y: scroll
+    overflow-y: scroll;
+    box-sizing: border-box;
 }
 
-::-webkit-scrollbar {
-    width: 0;
-    background: transparent;  
+.img-short {
+    width: 50%;
 }

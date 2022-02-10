@@ -1,36 +1,31 @@
 import './App.css';
 
-import { Routes, Route, Navigate  } from 'react-router-dom'
-
 import React from 'react';
+import { Routes, Route  } from 'react-router-dom'
+
+import { useSelector, useDispatch } from 'react-redux'
+import { getPosts } from './redux/features/postSlice';
+
+
 
 import Home from './pages/home-page/home-page.component';
 
 
 function App() {
 
+  const {posts, loading} = useSelector((state) => state.post)
 
-  const [posts, setPosts] = React.useState([])
+  const dispatch = useDispatch()
 
   React.useEffect( () => {
-    fetchData()
-    console.log(fetchData())
+    dispatch(getPosts())
   }, [])
-
-  const fetchData = async () => {
-    await fetch('https://jsonplaceholder.typicode.com/posts')
-    .then((res) => res.json())
-    .then((data) => setPosts(data))
-    .catch((err) => {
-      console.log(err)
-    })
-  }
 
   return (
     <div className="App">
 
     <Routes>
-        <Route exact path='/'  element={ <Home posts={posts}/> }/>
+        <Route exact path='/' element={ <Home posts={posts}/> }/>
     </Routes>
 
     </div>
